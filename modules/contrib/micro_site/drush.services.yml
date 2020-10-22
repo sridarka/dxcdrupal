@@ -1,0 +1,6 @@
+services:
+  micro_site.commands:
+    class: \Drupal\micro_site\Commands\MicroSiteCommands
+    arguments: ['@date.formatter', '@entity_type.manager', '@keyvalue']
+    tags:
+      - { name: drush.command }

@@ -1,0 +1,11 @@
+name: Micro site
+type: module
+description: Provide the content entity type site
+core: 8.x
+package: Micro
+configure: micro_site.settings
+
+# Information added by Drupal.org packaging script on 2020-02-08
+version: '8.x-1.0-alpha6'
+project: 'micro_site'
+datestamp: 1581153811

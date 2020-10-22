@@ -1,0 +1,69 @@
+{#
+/**
+ * @file micro-site-ifnormations.html.twig
+ * Basic barebone template for block micro-site-informations.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the container element.
+ * - entity: The current entity.
+ * - active_site: The current active site.
+ * - display_active_site : A boolean for displaying or not the active site.
+ * - entity_site: The main micro site of the current entity.
+ * - entity_sites: An array of the secondary micro sites of the current entity.
+ * - entity_sites_all : A boolean which indicates that the current entity is
+ *   available on all micro sites.
+ * - entity_include_master : Taxonomy Term entities are available only micro
+ *   sites with the sites_all options checked (and so the master is excluded).
+ *   This boolean indicates thaht the term is also available on the master.
+ * - entity_sites_all_label : The label which indicates that the current entity
+ *   is available on all micro sites (master included or excluded).
+ *
+ * @see entity_activity_entity_view()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes }}>
+  {% if display_active_site %}
+    {% if active_site %}
+      <div class="active-site">
+        <label>{{ 'Active site:'|t }}</label> <span>{{ active_site.label }}</span>
+      </div>
+    {% else %}
+      <div class="active-site">
+        <label>{{ 'Active site:'|t }}</label> <span>{{ 'Master host'|t }}</span>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {% if entity_site %}
+    <div class="entity-site">
+      <label>{{ 'Main site:'|t }}</label> <span>{{ entity_site.label }}</span>
+    </div>
+  {% elseif entity_sites is not empty %}
+    <div class="entity-site">
+      <label>{{ 'Main site:'|t }}</label> <span>{{ 'None'|t }}</span>
+    </div>
+  {% else %}
+    <div class="entity-site">
+      <label>{{ 'Main site:'|t }}</label> <span>{{ 'Master host'|t }}</span>
+    </div>
+  {% endif %}
+
+  {% if entity_sites %}
+    {% set other_sites = [] %}
+    {% for site in entity_sites %}
+      {% set other_sites = other_sites|merge([site.label]) %}
+    {% endfor %}
+
+    <div class="other-sites">
+      <label>{{ 'Other sites:'|t }}</label> <span>{{ other_sites|join(', ') }}</span>
+    </div>
+  {% endif %}
+
+  {% if entity_sites_all %}
+    <div class="all-sites">
+      <label>{{ 'all sites:'|t }}</label> <span>{{ entity_sites_all_label }}</span>
+    </div>
+  {% endif %}
+</div>
